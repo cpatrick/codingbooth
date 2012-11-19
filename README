@@ -1,0 +1,6 @@
+Coding Booth
+------------
+
+The goal of this is a simple web interface for delivering coding tutorials.
+
+This is a simple Flask app that using ZeroMQ and Mongo.

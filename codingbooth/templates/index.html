@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Coding Booth</title>
+    <style>
+      #leftside {
+        width:  50%;
+        height: 300px;
+        display: inline;
+      }
+      #rightside {
+        width: 50%;
+        height: 300px;
+        display: inline;
+      }
+    </style>
+    <script type="text/javascript" src="/static/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/static/codingbooth.index.js"></script>
+  </head>
+  <body>
+    <h2>Coding Booth</h2>
+        <div id="leftside">
+            <textarea rows="50" cols="50" name="code" id="code_input">
+                asdfasdfasdfasdfasd
+            </textarea>
+        </div>
+        <div id="rightside">
+            Here are the results of your code.
+        </div>
+        <br />
+        <input name="Compile" id="compile_button" type="submit">Compile</input>
+        <input name="Run" id="run_button" type="submit">Run</input>
+
+  </body>
+</html>
