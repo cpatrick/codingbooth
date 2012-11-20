@@ -2,34 +2,36 @@
 <html>
   <head>
     <title>Coding Booth</title>
-    <style>
-      #leftside {
-        width:  50%;
-        height: 300px;
-        display: inline;
-      }
-      #rightside {
-        width: 50%;
-        height: 300px;
-        display: inline;
-      }
-    </style>
-    <script type="text/javascript" src="/static/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="/static/codingbooth.index.js"></script>
+    <link rel="stylesheet" href="/static/codingbooth.index.css" />
+    <link rel="shortcut icon" href="/static/favicon.ico" />
+    <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js"
+    type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="/static/jquery-1.8.3.min.js"
+    charset="utf-8"></script>
+    <script type="text/javascript" src="/static/codingbooth.index.js"
+    charset="utf-8"></script>
   </head>
   <body>
-    <h2>Coding Booth</h2>
-        <div id="leftside">
-            <textarea rows="50" cols="50" name="code" id="code_input">
-                asdfasdfasdfasdfasd
-            </textarea>
-        </div>
-        <div id="rightside">
-            Here are the results of your code.
-        </div>
-        <br />
-        <input name="Compile" id="compile_button" type="submit">Compile</input>
-        <input name="Run" id="run_button" type="submit">Run</input>
+    <h2 class="title">Coding Booth</h2>
+    <div id="left">
+      <div id="code_input">#include "stdio.h"
 
+int main() {
+  printf("Hello, World!");
+  return 0;
+}
+</div>
+    </div>
+    <div id="right">
+      <div id="code_output">This is the output</div>
+    </div>
+    <div id="buttons">
+      <input class="button-link" name="Compile" id="compile_button" type="submit" value="Compile"></input>
+      <input class="button-link" name="Run" id="run_button" type="submit" value="Run"></input>
+      <input class="button-link" name="Clear" id="clear_button" type="submit" value="Clear"></input>
+    </div>
   </body>
 </html>
+
+
+
