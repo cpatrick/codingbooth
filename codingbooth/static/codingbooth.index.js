@@ -28,6 +28,9 @@ $(document).ready(function() {
     cb.output.setShowPrintMargin(false);
     cb.output.getSession().setUseWrapMode(true);
 
+    // Setup the proxy to activate the modal
+    $("#image_view_proxy").leanModal();
+
     // Setup code if passed into the index template
     if (cb.cur_code) {
         cb.editor.setValue(cb.cur_code);
@@ -71,9 +74,9 @@ $(document).ready(function() {
     });
 
     $('#view_button').click(function () {
-        //$('#image_view').append('<img src="/input/' + cb.cur_id + '.png" />');
-        $('#image_view').append('<img width="300" src="/input/' + cb.cur_id + '.png" /><img width="300" src="/output/' + cb.cur_id + '.png" />');
-        $('#image_view').modal();
+        $('#image_view').empty();
+        $('#image_view').append('<img class="display_image" width="300" src="/input/' + cb.cur_id + '.png" /><img class="display_image" width="300" src="/output/' + cb.cur_id + '.png" />');
+        $('#image_view_proxy').click();
     });
 
 });
