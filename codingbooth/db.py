@@ -1,5 +1,6 @@
 from pymongo import Connection
 from bson.objectid import ObjectId
+from bson.binary import Binary
 
 
 def set_code(object_id=None, code=""):
@@ -15,6 +16,18 @@ def set_code(object_id=None, code=""):
         db_id = collection.insert({'code': code})
     connection.close()
     return str(db_id)
+
+
+def set_output(object_id, file_path):
+    connection = Connection()
+    database = connection.codingbooth
+    collection = database.codes
+
+    with open(file_path, 'r') as infile:
+        blob = infile.read()
+        collection.update({'_id': ObjectId(object_id)},
+            {'$set': {'outputs': [{'name': 'output.png', 'content':Binary(blob)}]}})
+    return object_id
 
 
 def get_code(object_id):

@@ -8,6 +8,8 @@
     type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="/static/jquery-1.8.3.min.js"
     charset="utf-8"></script>
+    <script type="text/javascript" src="/static/jquery.simplemodal.1.4.3.min.js"
+    charset="utf-8"></script>
     <script type="text/javascript" src="/static/codingbooth.index.js"
     charset="utf-8"></script>
   </head>
@@ -28,8 +30,17 @@ int main() {
     <div id="buttons">
       <input class="button-link" name="Compile" id="compile_button" type="submit" value="Compile"></input>
       <input class="button-link" name="Run" id="run_button" type="submit" value="Run"></input>
+      <input class="button-link" name="View" id="view_button" type="submit" value="View Results"></input>
       <input class="button-link" name="Clear" id="clear_button" type="submit" value="Clear"></input>
     </div>
+    <div style="display: none" id="image_view">
+    </div>
+
+    <!-- preload the images -->
+    <div style='display:none'>
+      <img src='/static/x.png' alt='' />
+    </div>
+
     {% if name %}
     <script type="text/javascript">
     var cb = cb || {};

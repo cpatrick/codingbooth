@@ -1,6 +1,8 @@
 from flask import render_template
 from flask import jsonify
 from flask import request
+from flask import make_response
+from flask import abort
 
 import json
 
@@ -19,6 +21,29 @@ def index(name=None):
     else:
         return render_template('index.html')
 
+
+@app.route('/input/<cur_id>.png')
+def input_image(cur_id=None):
+    if cur_id:
+        full_code = db.get_full_code(cur_id)
+        img_doc = full_code['inputs'][0]
+        resp = make_response(img_doc['contents'])
+        resp.headers['Content-Type'] = 'image/png'
+        return resp
+    else:
+        abort(404)
+
+
+@app.route('/output/<cur_id>.png')
+def output_image(cur_id=None):
+    if cur_id:
+        full_code = db.get_full_code(cur_id)
+        img_doc = full_code['outputs'][0]
+        resp = make_response(img_doc['content'])
+        resp.headers['Content-Type'] = 'image/png'
+        return resp
+    else:
+        abort(404)
 
 @app.route('/compile', methods=['POST'])
 def compile():

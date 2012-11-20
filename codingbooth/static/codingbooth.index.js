@@ -70,4 +70,10 @@ $(document).ready(function() {
         cb.output.setValue("");
     });
 
+    $('#view_button').click(function () {
+        //$('#image_view').append('<img src="/input/' + cb.cur_id + '.png" />');
+        $('#image_view').append('<img width="300" src="/input/' + cb.cur_id + '.png" /><img width="300" src="/output/' + cb.cur_id + '.png" />');
+        $('#image_view').modal();
+    });
+
 });

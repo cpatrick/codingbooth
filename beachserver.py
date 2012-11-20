@@ -45,6 +45,9 @@ def run_from_cmake(object_id):
     test_runner = subprocess.Popen(['./test'],
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     run_output = test_runner.communicate()[0]
+    output_image_path = os.path.join(code_dir_path, 'output.png')
+    if os.path.exists(output_image_path):
+        db.set_output(object_id, output_image_path)
     return run_output
 
 while True:
