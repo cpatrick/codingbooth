@@ -26,6 +26,16 @@ def get_code(object_id):
     return result['code']
 
 
+def get_code_from_name(name):
+    """Retrieve code from the database given a name."""
+    connection = Connection()
+    database = connection.codingbooth
+    collection = database.codes
+    result = collection.find_one({'name': name})
+    connection.close()
+    return result
+
+
 def set_compile_results(object_id, results):
     """Put the compilation results into the database."""
     connection = Connection()

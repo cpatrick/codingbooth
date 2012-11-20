@@ -28,6 +28,11 @@ $(document).ready(function() {
     cb.output.setShowPrintMargin(false);
     cb.output.getSession().setUseWrapMode(true);
 
+    // Setup code if passed into the index template
+    if (cb.cur_code) {
+        cb.editor.setValue(cb.cur_code);
+    }
+
     // Attach to the compile click
     $('#compile_button').click(function () {
 

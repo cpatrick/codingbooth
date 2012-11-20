@@ -30,6 +30,13 @@ int main() {
       <input class="button-link" name="Run" id="run_button" type="submit" value="Run"></input>
       <input class="button-link" name="Clear" id="clear_button" type="submit" value="Clear"></input>
     </div>
+    {% if name %}
+    <script type="text/javascript">
+    var cb = cb || {};
+    cb.cur_id = {{cur_id|tojson|safe}};
+    cb.cur_code = {{code|tojson|safe}};
+    </script>
+    {% endif %}
   </body>
 </html>
 

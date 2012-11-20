@@ -10,7 +10,14 @@ from codingbooth import app, db, messenger
 @app.route('/')
 @app.route('/<name>')
 def index(name=None):
-    return render_template('index.html', name=name)
+    if name:
+        print name
+        full_code = db.get_code_from_name(name)
+        cur_id = str(full_code['_id'])
+        code = full_code['code']
+        return render_template('index.html', name=name, cur_id=cur_id, code=code)
+    else:
+        return render_template('index.html')
 
 
 @app.route('/compile', methods=['POST'])
