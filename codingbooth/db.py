@@ -8,7 +8,8 @@ def set_code(object_id=None, code=""):
     database = connection.codingbooth
     collection = database.codes
     if object_id:
-        collection.update({'_id': ObjectId(object_id)}, {'code': code})
+        collection.update({'_id': ObjectId(object_id)},
+            {'$set': {'code': code}})
         db_id = object_id
     else:
         db_id = collection.insert({'code': code})
