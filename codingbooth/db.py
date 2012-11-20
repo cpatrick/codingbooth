@@ -27,6 +27,16 @@ def get_code(object_id):
     return result['code']
 
 
+def get_full_code(object_id):
+    """get the full code document from the database."""
+    connection = Connection()
+    database = connection.codingbooth
+    collection = database.codes
+    result = collection.find_one({'_id': ObjectId(object_id)})
+    connection.close()
+    return result
+
+
 def get_code_from_name(name):
     """Retrieve code from the database given a name."""
     connection = Connection()
