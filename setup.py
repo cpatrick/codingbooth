@@ -1,9 +1,14 @@
 from setuptools import setup
 
+
+def readme():
+    with open('README.rst') as infile:
+        return infile.read()
+
 setup(
   name='Coding Booth',
   version='0.0.1',
-  long_description=__doc__,
+  long_description=readme(),
   packages=['codingbooth'],
   include_package_data=True,
   zip_safe=False,
