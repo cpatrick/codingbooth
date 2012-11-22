@@ -12,5 +12,5 @@ setup(
   packages=['codingbooth'],
   include_package_data=True,
   zip_safe=False,
-  install_requires=['Flask >= 0.8', 'pymongo>=2.3', 'pyzmq>=2.2.0.1']
+  install_requires=['Flask>=0.8', 'pymongo>=2.3', 'pyzmq>=2.2.0.1']
 )
