@@ -59,8 +59,37 @@ Install C++ development tools (and libraries)
 
 Populate a python virtual environment
 
-    virtualenv booth_env
-    source booth_env/bin/activate
+    virtualenv codingbooth_env
+    source codingbooth_env/bin/activate
     pip install Flask
     pip install pyzmq
     pip install pymongo
+    cd codingbooth_env
+    git clone git://github.com/cpatrick/codingbooth.git
+    cd codingbooth
+    python setup.py develop
+
+Now that the environment is basically setup. We will install uwsgi and
+supervisor to daemonize uwsgi and beachserver (the server for compilation
+in a sandbox). We use pip instead of yum because the version of uwsgi in pip
+is more up-to-date, therefore more feature-rich.
+
+    sudo pip-python install uwsgi
+    sudo yum install supervisor
+
+And enable supervisord:
+
+    sudo systemctl enable supervisord.service
+
+Once supervisor is setup, we need to setup jobs to start uwsgi and the server by
+creating areas configs for the codingbooth uwsgi job and the beachserver. This
+is done by adding the files in supervisor-configs to /etc/supervisord.d/.
+
+    sudo cp /home/ec2-user/codingbooth_env/codingbooth/supervisor-configs/*.ini \
+    /etc/supervisord.d/
+
+Then start the supervisord:
+
+    sudo systemctl start supervisord.service
+
+With that, everything should be setup and ready to go.
