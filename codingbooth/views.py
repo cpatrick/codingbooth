@@ -1,16 +1,45 @@
-from flask import render_template
-from flask import jsonify
-from flask import request
-from flask import make_response
-from flask import abort
+from flask import render_template, jsonify, request, make_response, abort, flash
+from flask import redirect, url_for
+from flask.ext.login import login_user
 
 import json
 
-from codingbooth import app, db, messenger
+from codingbooth import app, db, messenger, forms, models
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = forms.LoginForm()
+    if form.validate_on_submit():
+        user = models.User()
+        if user.load_by_email(form.email.data):
+            if user.check_password(form.password.data):
+                login_user(user)
+                flash("Logged in successfully.")
+                return redirect(request.args.get("next") or url_for("index"))
+            else:
+                flash("The provided password is incorrect.")
+        else:
+            flash("User does not exist.")
+    return render_template("login.html", form=form)
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form = forms.RegistrationForm()
+    if form.validate_on_submit():
+        if not models.User.check_existence_by_email(form.email.data):
+            user = models.User(form.email.data, form.password.data)
+            user.save()
+            flash("Registration succeeded!")
+            return redirect(request.args.get("next") or url_for("login"))
+        else:
+            flash("That user already exists.")
+    return render_template("register.html", form=form)
 
 
 @app.route('/')
-@app.route('/<name>')
+@app.route('/code/<name>')
 def index(name=None):
     if name:
         print name
@@ -44,6 +73,7 @@ def output_image(cur_id=None):
         return resp
     else:
         abort(404)
+
 
 @app.route('/compile', methods=['POST'])
 def compile():

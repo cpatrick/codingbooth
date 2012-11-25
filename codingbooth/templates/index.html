@@ -1,9 +1,6 @@
-<!doctype html>
-<html>
-  <head>
-    <title>Coding Booth</title>
+{% extends "layout.html" %}
+{% block head %}
     <link rel="stylesheet" href="/static/codingbooth.index.css" />
-    <link rel="shortcut icon" href="/static/favicon.ico" />
     <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js"
     type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="/static/jquery-1.8.3.min.js"
@@ -12,8 +9,8 @@
     charset="utf-8"></script>
     <script type="text/javascript" src="/static/codingbooth.index.js"
     charset="utf-8"></script>
-  </head>
-  <body>
+{% endblock %}
+{% block body %}
     <h2 class="title">Coding Booth</h2>
     <div id="left">
       <div id="code_input">#include "stdio.h"
@@ -36,7 +33,6 @@ int main() {
     <div style="display: none" id="image_view">
     </div>
 
-    <!-- preload the images -->
     <div style='display:none'>
       <a id="image_view_proxy" href="#image_view"></a>
     </div>
@@ -48,5 +44,6 @@ int main() {
     cb.cur_code = {{code|tojson|safe}};
     </script>
     {% endif %}
+{% endblock %}
   </body>
 </html>

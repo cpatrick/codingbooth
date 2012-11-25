@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Coding Booth</title>
+    <link rel="shortcut icon" href="/static/favicon.ico" />
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="flashes">
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+{% block body %}{% endblock %}
+  </body>
+</html>

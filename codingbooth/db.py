@@ -80,3 +80,47 @@ def set_run_results(object_id, results):
         {'$set': {'run': results}})
     connection.close()
     return db_id
+
+
+def create_user(email, password):
+    """Create a user in the database with a given name, email, and password."""
+    connection = Connection()
+    database = connection.codingbooth
+    collection = database.users
+    db_id = collection.insert({
+        'email': email,
+        'password': password})
+    connection.close()
+    return db_id
+
+
+def save_user(object_id, email, password):
+    """Save the user to the database."""
+    connection = Connection()
+    database = connection.codingbooth
+    collection = database.users
+    collection.update({'_id': ObjectId(object_id)},
+        {'$set': {
+        'email': email,
+        'password': password}})
+    connection.close()
+
+
+def load_user(object_id):
+    """Load the user based on the given id."""
+    connection = Connection()
+    database = connection.codingbooth
+    collection = database.users
+    result = collection.find_one({'_id': ObjectId(object_id)})
+    connection.close()
+    return result
+
+
+def load_user_by_email(email):
+    """Load the user based on the given email"""
+    connection = Connection()
+    database = connection.codingbooth
+    collection = database.users
+    result = collection.find_one({'email': email})
+    connection.close()
+    return result
