@@ -15,12 +15,12 @@ def login():
         if user.load_by_email(form.email.data):
             if user.check_password(form.password.data):
                 login_user(user)
-                flash("Logged in successfully.")
+                flash("Logged in successfully.", "success")
                 return redirect(request.args.get("next") or url_for("index"))
             else:
-                flash("The provided password is incorrect.")
+                flash("The provided password is incorrect.", "error")
         else:
-            flash("User does not exist.")
+            flash("User does not exist.", "error")
     return render_template("login.html", form=form)
 
 
@@ -31,10 +31,10 @@ def register():
         if not models.User.check_existence_by_email(form.email.data):
             user = models.User(form.email.data, form.password.data)
             user.save()
-            flash("Registration succeeded!")
+            flash("Registration succeeded!", "success")
             return redirect(request.args.get("next") or url_for("login"))
         else:
-            flash("That user already exists.")
+            flash("That user already exists.", "error")
     return render_template("register.html", form=form)
 
 
