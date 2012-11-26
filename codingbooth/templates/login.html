@@ -4,12 +4,13 @@
 {% endblock %}
 {% block body %}
     {% from "_formhelpers.html" import render_field %}
-    <form method="post" action="/login">
+    <form class="form-signin" method="post" action="/login">
+        <h2 class="form-signin-heading">Please sign in</h2>
         {{ form.csrf_token }}
       <dl>
         {{ render_field(form.email) }}
         {{ render_field(form.password) }}
       </dl>
-      <p><input type="submit" value="Login">
+      <button class="btn btn-large btn-primary" type="submit">Sign in</button>
     </form>
 {% endblock %}

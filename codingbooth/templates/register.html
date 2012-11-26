@@ -1,16 +1,17 @@
 {% extends "layout.html" %}
 {% block head %}
-    <link rel="stylesheet" href="/static/codingbooth..css" />
+    <link rel="stylesheet" href="/static/codingbooth.register.css" />
 {% endblock %}
 {% block body %}
     {% from "_formhelpers.html" import render_field %}
-    <form method="post" action="/register">
+    <form class="form-register" method="post" action="/register">
+      <h2 class="form-register-heading">User Registration</h2>
         {{ form.csrf_token }}
       <dl>
         {{ render_field(form.email) }}
         {{ render_field(form.password) }}
         {{ render_field(form.confirm) }}
       </dl>
-      <p><input type="submit" value="Login">
+      <button class="btn btn-large btn-primary" type="submit">Register</button>
     </form>
 {% endblock %}
