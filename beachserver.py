@@ -39,13 +39,18 @@ def compile_with_cmake(object_id):
 
 
 def run_from_cmake(object_id):
+    code_doc = db.get_full_code(object_id)
     os.chdir(sandbox_path)
     code_dir_path = os.path.abspath(object_id)
     os.chdir(code_dir_path)
-    test_runner = subprocess.Popen(['./test'],
+    params = ['./test']
+    if 'run_parameters' in code_doc:
+        params = code_doc['run_parameters'].split()
+        print params
+    test_runner = subprocess.Popen(params,
         stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     run_output = test_runner.communicate()[0]
-    output_image_path = os.path.join(code_dir_path, 'output.png')
+    output_image_path = os.path.join(code_dir_path, 'output.png')  # Magic val
     if os.path.exists(output_image_path):
         db.set_output(object_id, output_image_path)
     return run_output

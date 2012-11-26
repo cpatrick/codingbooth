@@ -39,11 +39,13 @@ def register():
 
 
 @app.route('/')
+@app.route('/code/')
 @app.route('/code/<name>')
 def index(name=None):
     if name:
-        print name
         full_code = db.get_code_from_name(name)
+        if full_code == None:
+            abort(404)
         cur_id = str(full_code['_id'])
         code = full_code['code']
         return render_template('index.html', name=name, cur_id=cur_id, code=code)
